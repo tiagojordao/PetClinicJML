@@ -16,7 +16,12 @@ public class AppointmentController {
 		appointments.add(app);
 	}
 	
-	//@ ensures \result != null;
+	/*@ 
+	@	public constraint (\forall int i; i>=0 && i < appointments.size();
+	@						appointments.get(i) instanceof Appointment);
+	@ also
+	@ ensures \result != null;
+	@*/
 	public List<Appointment> getAllAppointments() {
 		return appointments;
 	}
