@@ -1,44 +1,59 @@
 package petclinic;
 
 public class Pet {
+	private /*@ spec_public @*/ int id;
+	private /*@ spec_public @*/ String name;
+	private /*@ spec_public @*/ String birthday;
+	private /*@ spec_public @*/ String owner;
 	
-	private int id;
-	private String name;
-	private String birthday;
-	private String owner;
-	
-	public Pet(int id, String name, String birthday, String owner) {
-		this.id = id;
-		this.name = name;
-		this.birthday = birthday;
-		this.owner = owner;
+	/*@
+    @		requires n_id >= 0;
+    @		requires n_name != "";
+    @		requires n_birthday != "";
+    @		requires n_owner != "";
+    @		ensures id == n_id;
+    @		ensures name == n_name;
+    @		ensures birthday == n_birthday;
+    @		ensures owner == n_owner;
+    @*/
+	public Pet(int n_id, String n_name, String n_birthday, String n_owner) {
+		this.id = n_id;
+		this.name = n_name;
+		this.birthday = n_birthday;
+		this.owner = n_owner;
 	}
-
-	public int getId() {
+	public /*@ pure @*/ int getId() {
 		return id;
 	}
-	public String getName() {
+	public /*@ pure @*/ String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	/*@ also
+	@	assignable name;
+	@	ensures name == n_name;
+	@*/
+	public void setName(String n_name) {
+		this.name = n_name;
 	}
-
-	public String getBirthday() {
+	public /*@ pure @*/ String getBirthday() {
 		return birthday;
 	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	/*@ also
+	@	assignable birthday;
+	@	ensures birthday == n_birthday;
+	@*/
+	public void setBirthday(String n_birthday) {
+		this.birthday = n_birthday;
 	}
-
-	public String getOwner() {
+	public /*@ pure @*/ String getOwner() {
 		return owner;
 	}
-
-	public void setOwner(String owner) {
-		this.owner = owner;
+	/*@ also
+	@	assignable owner;
+	@	ensures owner == n_owner;
+	@*/
+	public void setOwner(String n_owner) {
+		this.owner = n_owner;
 	}
 	
 	
